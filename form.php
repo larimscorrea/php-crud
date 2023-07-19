@@ -5,28 +5,27 @@
     Senha:
     <input type="password" name="senha">
 
-    <select name="cores" onchange="exibirCorSecundaria(this.value)" id="">
-        <option value=""></option>
-        <option value="amarelo">amarelo</option>
-        <option value="vermelho">vermelho</option>
-        <option value="azul">Azul</option>
+    <select name="corSecundaria" onchange="exibirCorSecundaria(this)">
+        <option value="" data-info=""></option>
+        <option value="amarelo" data-info="Cor secundária: Laranja">amarelo</option>
+        <option value="vermelho" data-info="Cor secundária: Roxo">vermelho</option>
+        <option value="azul" data-info="Cor secundária: Verde">Azul</option>
     </select>
 
     <div id="corSecundaria"></div>
 
 <script>
-  function exibirCorSecundaria(cor) {
+  function exibirCorSecundaria(selectElement) {
     var corSecundariaDiv = document.getElementById('corSecundaria');
-    
-    if (cor === 'amarelo') {
-      corSecundariaDiv.innerHTML = 'Cor secundária: Laranja';
-    } else if (cor === 'vermelho') {
-      corSecundariaDiv.innerHTML = 'Cor secundária: Roxo';
-    } else if (cor === 'azul') {
-      corSecundariaDiv.innerHTML = 'Cor secundária: Verde';
-    } else {
-      corSecundariaDiv.innerHTML = '';
-    }
+    var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+    var corSecundariaValue = selectedOption.value;
+    var corSecundariaInfo = selectedOption.getAttribute('data-info');
+
+    corSecundariaDiv.innerHTML = corSecundariaInfo;
+
+    // Atualizar o valor do option para enviar ambas as informações
+    selectedOption.value = corSecundariaValue + '|' + corSecundariaInfo;
   }
 
   function enviarCorSecundaria(corSecundaria) {
@@ -41,10 +40,13 @@
     xhttp.send("corSecundaria=" + corSecundaria);
   }
 </script>
+
     
     <input type="submit" value="Enviar" /> 
-
 </form>
+
+
+
 
 <?php
 if (isset($_POST['nomeusuario'])) {
@@ -53,6 +55,10 @@ if (isset($_POST['nomeusuario'])) {
 
 if (isset($_POST['cor'])) {
     echo $_POST['cor'] . '</br>';
+}
+
+if (isset($_POST['corSecundaria'])) {
+  echo $_POST['corSecundaria'] . '</br>';
 }
 
 if (isset($_POST['senha'])) {
