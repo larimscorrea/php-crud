@@ -12,12 +12,12 @@ if ($conn) {
     if (isset($_POST['nomeusuario']) && isset($_POST['senha']) && isset($_POST['corSecundaria'])) {
         $nome = $_POST['nomeusuario'];
         $senha = $_POST['senha'];
-        $corSecundaria = $_POST['corSecundaria'];
+        $cores = $_POST['corSecundaria'];
 
-        // Separar o valor da cor secundária da informação adicional usando explode
-        list($cor, $corSecundariaInfo) = explode('|', $corSecundaria);
+        // Separar os valores enviados usando explode
+        list($corSecundariaValue, $corSecundariaInfo, $corPrimariaValue, $corPrimariaInfo) = explode('|', $cores);
 
-        $sql = "INSERT INTO cadastro (nome, cor, corSecundaria, senha) VALUES ('$nome', '$cor', '$corSecundariaInfo', '$senha')";
+        $sql = "INSERT INTO cadastro (nome, cor_secundaria, cor_secundaria_info, cor_primaria, cor_primaria_info, senha) VALUES ('$nome', '$corSecundariaValue', '$corSecundariaInfo', '$corPrimariaValue', '$corPrimariaInfo', '$senha')";
 
         if (mysqli_query($conn, $sql)) {
             echo "Registro inserido com sucesso.";
@@ -33,5 +33,6 @@ if ($conn) {
     echo "Falha na conexão: " . mysqli_connect_error();
 }
 ?>
+
 
 
