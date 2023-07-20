@@ -5,7 +5,7 @@
     Senha:
     <input type="password" name="senha">
 
-    <select name="corSecundaria" onchange="exibirCores(this)">
+    <select name="cor" onchange="exibirCores(this)">
       <option value="" data-info="" data-primaria="" data-info-primaria=""></option>
       <option value="amarelo" data-info="Cor secundária: Laranja" data-primaria="verde" data-info-primaria="Cor primária: verde">amarelo</option>
       <option value="vermelho" data-info="Cor secundária: Roxo" data-primaria="rosa" data-info-primaria="Cor primária: rosa">vermelho</option>
@@ -16,40 +16,49 @@
     <div id="corSecundaria"></div>
 
 
-<script>
-  function exibirCores(selectElement) {
-    var corSecundariaDiv = document.getElementById('corSecundaria');
-    var corPrimariaDiv = document.getElementById('corPrimaria');
-    var selectedOption = selectElement.options[selectElement.selectedIndex];
+  <script>
+      function exibirCores(selectElement) {
+        var corSecundariaDiv = document.getElementById('corSecundaria');
+        var corPrimariaDiv = document.getElementById('corPrimaria');
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
 
-    var corSecundariaValue = selectedOption.value;
-    var corSecundariaInfo = selectedOption.getAttribute('data-info');
-    corSecundariaDiv.innerHTML = corSecundariaInfo;
+        var corSecundariaValue = selectedOption.value;
+        var corSecundariaInfo = selectedOption.getAttribute('data-info');
+        corSecundariaDiv.innerHTML = corSecundariaInfo;
 
-    var corPrimariaValue = selectedOption.getAttribute('data-primaria');
-    var corPrimariaInfo = selectedOption.getAttribute('data-info-primaria');
-    corPrimariaDiv.innerHTML = corPrimariaInfo;
+        var corPrimariaValue = selectedOption.getAttribute('data-primaria');
+        var corPrimariaInfo = selectedOption.getAttribute('data-info-primaria');
+        corPrimariaDiv.innerHTML = corPrimariaInfo;
 
-    // Atualizar o valor do option para enviar ambas as informações
-    selectedOption.value = corSecundariaValue + '|' + corSecundariaInfo + '|' + corPrimariaValue + '|' + corPrimariaInfo;
-  }
-
-  function enviarCores(cores) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) {
-        console.log('Cores enviadas para o servidor.');
+        // Atualizar o valor do option para enviar ambas as informações
+        selectedOption.value = corSecundariaValue + '|' + corSecundariaInfo + '|' + corPrimariaValue + '|' + corPrimariaInfo;
       }
-    };
-    xhttp.open("POST", "salvar_cores.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("cores=" + cores);
-  }
-</script>
+
+      function enviarCores() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+          console.log('Formulário enviado para o servidor.');
+        }
+      };
+      xhttp.open("POST", "receber.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      
+      // Obter o valor da opção selecionada
+      var corSecundaria = document.querySelector('select[name="corSecundaria"]').value;
+      
+      // Criar um objeto FormData com todos os dados do formulário
+      var formData = new FormData(document.querySelector("form"));
+      formData.append("corSecundaria", corSecundaria); // Adicionar a cor secundária selecionada ao FormData
+      
+      xhttp.send(formData);
+    }
+
+  </script>
 
 
     
-    <input type="submit" value="Enviar" /> 
+    <input type="submit" value="Enviar" onclick="enviarCores()" /> 
 </form>
 
 
