@@ -5,33 +5,33 @@
     Senha:
     <input type="password" name="senha">
 
-    <select name="cor" onchange="exibirCores(this)">
+    <select name="cor" onchange="exibirBairro(this)">
       <option value="" data-info="" data-primaria="" data-info-primaria=""></option>
-      <option value="amarelo" data-info="Cor secundária: Laranja" data-primaria="verde" data-info-primaria="Cor primária: verde">amarelo</option>
-      <option value="vermelho" data-info="Cor secundária: Roxo" data-primaria="rosa" data-info-primaria="Cor primária: rosa">vermelho</option>
-      <option value="azul" data-info="Cor secundária: Verde" data-primaria="roxo" data-info-primaria="Cor primária: roxo">Azul</option>
+      <option value="aldeota" data-info="Regional 1" data-primaria="verde" data-info-primaria="Território 31">Aldeota</option>
+      <option value="boavista" data-info="Regional 2" data-primaria="rosa" data-info-primaria="Território 30">Boa-vista</option>
+      <option value="carlito" data-info="Regional 3" data-primaria="roxo" data-info-primaria="Território 29">Carlito</option>
     </select>
 
-    <div id="corPrimaria"></div>
-    <div id="corSecundaria"></div>
+    <div id="regional"></div>
+    <div id="territorio"></div>
 
 
   <script>
-      function exibirCores(selectElement) {
-        var corSecundariaDiv = document.getElementById('corSecundaria');
-        var corPrimariaDiv = document.getElementById('corPrimaria');
+      function exibirBairro(selectElement) {
+        var regionalDiv = document.getElementById('regional');
+        var territorioDiv = document.getElementById('territorio');
         var selectedOption = selectElement.options[selectElement.selectedIndex];
 
-        var corSecundariaValue = selectedOption.value;
-        var corSecundariaInfo = selectedOption.getAttribute('data-info');
-        corSecundariaDiv.innerHTML = corSecundariaInfo;
+        var regionalValue = selectedOption.value;
+        var regionalInfo = selectedOption.getAttribute('data-info');
+        regionalDiv.innerHTML = regionalInfo;
 
-        var corPrimariaValue = selectedOption.getAttribute('data-primaria');
-        var corPrimariaInfo = selectedOption.getAttribute('data-info-primaria');
-        corPrimariaDiv.innerHTML = corPrimariaInfo;
+        var territorioValue = selectedOption.getAttribute('data-primaria');
+        var territorioInfo = selectedOption.getAttribute('data-info-primaria');
+        territorioDiv.innerHTML = territorioInfo;
 
         // Atualizar o valor do option para enviar ambas as informações
-        selectedOption.value = corSecundariaValue + '|' + corSecundariaInfo + '|' + corPrimariaValue + '|' + corPrimariaInfo;
+        selectedOption.value = regionalValue + '|' + regionalInfo + '|' + territorioValue + '|' + territorioInfo;
       }
 
       function enviarCores() {
@@ -45,11 +45,11 @@
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       
       // Obter o valor da opção selecionada
-      var corSecundaria = document.querySelector('select[name="corSecundaria"]').value;
+      var regional = document.querySelector('select[name="corSecundaria"]').value;
       
       // Criar um objeto FormData com todos os dados do formulário
       var formData = new FormData(document.querySelector("form"));
-      formData.append("corSecundaria", corSecundaria); // Adicionar a cor secundária selecionada ao FormData
+      formData.append("regional", regional); // Adicionar a cor secundária selecionada ao FormData
       
       xhttp.send(formData);
     }
@@ -58,7 +58,7 @@
 
 
     
-    <input type="submit" value="Enviar" onclick="enviarCores()" /> 
+    <input type="submit" value="Enviar" onclick="enviarBairros()" /> 
 </form>
 
 
