@@ -13,11 +13,14 @@ if (isset($_POST['nomeusuario']) && isset($_POST['senha']) && isset($_POST['bair
         $nome = $_POST['nomeusuario'];
         $senha = $_POST['senha'];
         $bairro = $_POST['bairro'];
+        $genero = $_POST['genero'];
 
+       
         // Separar os valores enviados usando explode
         list($bairroValue, $regionalValue, $territorioValue) = explode('|', $bairro);
 
-        $sql = "INSERT INTO cadastro (nome, bairro, regional, territorio, senha) VALUES ('$nome', '$bairroValue', '$regionalValue', '$territorioValue', '$senha')";
+
+        $sql = "INSERT INTO cadastro (nome, bairro, regional, territorio, genero, senha) VALUES ('$nome', '$bairroValue', '$regionalValue', '$territorioValue', '$genero', '$senha')";
 
         if (mysqli_query($conn, $sql)) {
             echo " Registro inserido com sucesso.";

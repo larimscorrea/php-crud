@@ -17,20 +17,20 @@
     <div id="regional"></div>
     <div id="territorio"></div>
 
-    <label>
-      <input type="radio" name="genero" value="feminino"> Feminino
-    </label>
-    <label>
-      <input type="radio" name="genero" value="masculino"> Masculino
-    </label>
-    <label>
-      <input type="radio" name="genero" value="outro" onclick="exibirCampoOutro()"> Outro
-    </label>
+      <label>
+        <input type="radio" name="genero" value="feminino" onclick="exibirCampoOutro()"> Feminino
+      </label>
+      <label>
+        <input type="radio" name="genero" value="masculino" onclick="exibirCampoOutro()"> Masculino
+      </label>
+      <label>
+        <input type="radio" name="genero" value="outro" onclick="exibirCampoOutro()"> Outro
+      </label>
 
-    <div id="outro" style="display: none;">
-      Qual gênero?
-      <input type="text" name="outro-genero" id="outro-genero"> 
-    </div>
+      <div id="outro" style="display: none;">
+        Qual gênero?
+        <input type="text" name="outro-genero" id="outro-genero"> 
+      </div>
 
 
 
@@ -56,7 +56,6 @@
         selectedOption.value = bairroValue;
     }
 
-
   function exibirCampoOutro() {
   var outroRadio = document.querySelector('input[name="genero"][value="outro"]');
   var outroDiv = document.getElementById('outro');
@@ -67,6 +66,16 @@
     outroDiv.style.display = 'none';
   }
 }
+
+  // Monitorar mudanças nos inputs radio
+  var radioInputs = document.querySelectorAll('input[type="radio"][name="genero"]');
+  for (var i = 0; i < radioInputs.length; i++) {
+    radioInputs[i].addEventListener('change', exibirCampoOutro);
+  }
+
+  exibirBairro();
+  
+
 </script>
 
 <!-- 
@@ -92,6 +101,9 @@ if (isset($_POST['territorio'])) {
   echo $_POST['territorio'] . '</br>';
 }
 
+if (isset($_POST['genero'])) {
+  echo $_POST['genero'] . '</br>';
+}
 
 if (isset($_POST['senha'])) {
     echo $_POST['senha'];
