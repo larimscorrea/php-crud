@@ -14,6 +14,15 @@
       <option value="carlito|Regional 3|Território 29">Carlito</option>
     </select>
 
+
+    <!-- <select name="bairro" onchange="exibirBairro(this)">
+      <option value="" data-info="" data-info-primaria=""></option>
+      <option value="aldeota" data-info="Regional 1" data-info-primaria="Território 31">Aldeota</option>
+      <option value="boavista" data-info="Regional 2" data-info-primaria="Território 30">Boa-vista</option>
+      <option value="carlito" data-info="Regional 3" data-info-primaria="Território 29">Carlito</option>
+    </select> -->
+
+
     <div id="regional"></div>
     <div id="territorio"></div>
 
@@ -32,10 +41,6 @@
         <input type="text" name="outro-genero" id="outro-genero"> 
       </div>
 
-
-
-
-
     <input type="submit" value="Enviar" />
 </form>
 
@@ -49,8 +54,8 @@
         var regionalValue = selectedOption.getAttribute('data-info');
         var territorioValue = selectedOption.getAttribute('data-info-primaria');
 
-        regionalDiv.innerHTML = regionalValue;
-        territorioDiv.innerHTML = territorioValue;
+        regionalDiv.innerHTML = `<p>Regional: ${regionalValue} </p>`;
+        territorioDiv.innerHTML = `<p>Território: ${territorioValue} </p>`;
 
         // Atualizar o valor do option para enviar apenas o valor do bairro
         selectedOption.value = bairroValue;
