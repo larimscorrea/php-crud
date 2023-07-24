@@ -5,7 +5,7 @@
     Senha:
     <input type="password" name="senha">
 
-    <select name="cor" onchange="exibirBairro(this)">
+    <select name="bairro" onchange="exibirBairro(this)">
       <option value="" data-info="" data-primaria="" data-info-primaria=""></option>
       <option value="aldeota" data-info="Regional 1" data-primaria="verde" data-info-primaria="Território 31">Aldeota</option>
       <option value="boavista" data-info="Regional 2" data-primaria="rosa" data-info-primaria="Território 30">Boa-vista</option>
@@ -15,51 +15,30 @@
     <div id="regional"></div>
     <div id="territorio"></div>
 
+    <input type="submit" value="Enviar" />
+</form>
 
-  <script>
-      function exibirBairro(selectElement) {
+<script>
+    function exibirBairro(selectElement) {
         var regionalDiv = document.getElementById('regional');
         var territorioDiv = document.getElementById('territorio');
         var selectedOption = selectElement.options[selectElement.selectedIndex];
 
-        var regionalValue = selectedOption.value;
-        var regionalInfo = selectedOption.getAttribute('data-info');
-        regionalDiv.innerHTML = regionalInfo;
+        var regionalValue = selectedOption.getAttribute('data-info');
+        regionalDiv.innerHTML = regionalValue;
 
-        var territorioValue = selectedOption.getAttribute('data-primaria');
-        var territorioInfo = selectedOption.getAttribute('data-info-primaria');
-        territorioDiv.innerHTML = territorioInfo;
+        var territorioValue = selectedOption.getAttribute('data-info-primaria');
+        territorioDiv.innerHTML = territorioValue;
 
-        // Atualizar o valor do option para enviar ambas as informações
-        selectedOption.value = regionalValue + '|' + regionalInfo + '|' + territorioValue + '|' + territorioInfo;
-      }
-
-      function enviarCores() {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-          console.log('Formulário enviado para o servidor.');
-        }
-      };
-      xhttp.open("POST", "receber.php", true);
-      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      
-      // Obter o valor da opção selecionada
-      var regional = document.querySelector('select[name="corSecundaria"]').value;
-      
-      // Criar um objeto FormData com todos os dados do formulário
-      var formData = new FormData(document.querySelector("form"));
-      formData.append("regional", regional); // Adicionar a cor secundária selecionada ao FormData
-      
-      xhttp.send(formData);
+        // Atualizar o valor do option para enviar ambas as informações separadas por |
+        selectedOption.value = selectedOption.value + '|' + regionalValue + '|' + selectedOption.value + '|' + territorioValue;
     }
+</script>
 
-  </script>
-
-
+<!-- 
     
-    <input type="submit" value="Enviar" onclick="enviarBairros()" /> 
-</form>
+    <input type="submit" value="Enviar" onclick="enviarBairro()" /> 
+</form> -->
 
 
 
@@ -69,16 +48,16 @@ if (isset($_POST['nomeusuario'])) {
     echo $_POST['nomeusuario'] . '</br>';
 }
 
-if (isset($_POST['cor'])) {
+if (isset($_POST['bairro'])) {
     echo $_POST['cor'] . '</br>';
 }
 
-if (isset($_POST['corSecundaria'])) {
-  echo $_POST['corSecundaria'] . '</br>';
+if (isset($_POST['regional'])) {
+  echo $_POST['regional'] . '</br>';
 }
 
-if (isset($_POST['corPrimaria'])) {
-  echo $_POST['corPrimaria'] . '</br>';
+if (isset($_POST['territorio'])) {
+  echo $_POST['territorio'] . '</br>';
 }
 
 
