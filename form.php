@@ -6,10 +6,10 @@
     <input type="password" name="senha">
 
     <select name="bairro" onchange="exibirBairro(this)">
-      <option value="" data-info="" data-primaria="" data-info-primaria=""></option>
-      <option value="aldeota" data-info="Regional 1" data-primaria="verde" data-info-primaria="Território 31">Aldeota</option>
-      <option value="boavista" data-info="Regional 2" data-primaria="rosa" data-info-primaria="Território 30">Boa-vista</option>
-      <option value="carlito" data-info="Regional 3" data-primaria="roxo" data-info-primaria="Território 29">Carlito</option>
+      <option value="" data-info="" data-info-primaria=""></option>
+      <option value="aldeota|Regional 1|Território 31">Aldeota</option>
+      <option value="boavista|Regional 2|Território 30">Boa-vista</option>
+      <option value="carlito|Regional 3|Território 29">Carlito</option>
     </select>
 
     <div id="regional"></div>
@@ -24,16 +24,20 @@
         var territorioDiv = document.getElementById('territorio');
         var selectedOption = selectElement.options[selectElement.selectedIndex];
 
+        var bairroValue = selectedOption.value;
         var regionalValue = selectedOption.getAttribute('data-info');
-        regionalDiv.innerHTML = regionalValue;
-
         var territorioValue = selectedOption.getAttribute('data-info-primaria');
+
+        regionalDiv.innerHTML = regionalValue;
         territorioDiv.innerHTML = territorioValue;
 
-        // Atualizar o valor do option para enviar ambas as informações separadas por |
-        selectedOption.value = selectedOption.value + '|' + regionalValue + '|' + selectedOption.value + '|' + territorioValue;
+        // Atualizar o valor do option para enviar apenas o valor do bairro
+        selectedOption.value = bairroValue;
     }
 </script>
+
+
+
 
 <!-- 
     

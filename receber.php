@@ -15,9 +15,9 @@ if (isset($_POST['nomeusuario']) && isset($_POST['senha']) && isset($_POST['bair
         $bairro = $_POST['bairro'];
 
         // Separar os valores enviados usando explode
-        list($bairroValue, $regionalValue, $bairroValueAgain, $territorioValue) = explode('|', $bairro);
+        list($bairroValue, $regionalValue, $territorioValue) = explode('|', $bairro);
 
-        $sql = "INSERT INTO cadastro (nome, regional, regional_info, territorio, territorio_info, senha) VALUES ('$nome', '$regionalValue', '$bairroValue', '$territorioValue', '$bairroValueAgain', '$senha')";
+        $sql = "INSERT INTO cadastro (nome, bairro, regional, territorio, senha) VALUES ('$nome', '$bairroValue', '$regionalValue', '$territorioValue', '$senha')";
 
         if (mysqli_query($conn, $sql)) {
             echo " Registro inserido com sucesso.";
@@ -33,6 +33,10 @@ if (isset($_POST['nomeusuario']) && isset($_POST['senha']) && isset($_POST['bair
     echo " Campos de formulário não estão definidos.";
 }
 ?>
+
+
+
+
 
 
 
