@@ -5,6 +5,8 @@
     Senha:
     <input type="password" name="senha">
 
+
+    Selecione o bairro
     <select name="bairro" onchange="exibirBairro(this)">
       <option value="" data-info="" data-info-primaria=""></option>
       <option value="aldeota|Regional 1|Território 31">Aldeota</option>
@@ -14,6 +16,25 @@
 
     <div id="regional"></div>
     <div id="territorio"></div>
+
+    <label>
+      <input type="radio" name="genero" value="feminino"> Feminino
+    </label>
+    <label>
+      <input type="radio" name="genero" value="masculino"> Masculino
+    </label>
+    <label>
+      <input type="radio" name="genero" value="outro" onclick="exibirCampoOutro()"> Outro
+    </label>
+
+    <div id="outro" style="display: none;">
+      Qual gênero?
+      <input type="text" name="outro-genero" id="outro-genero"> 
+    </div>
+
+
+
+
 
     <input type="submit" value="Enviar" />
 </form>
@@ -34,17 +55,24 @@
         // Atualizar o valor do option para enviar apenas o valor do bairro
         selectedOption.value = bairroValue;
     }
+
+
+  function exibirCampoOutro() {
+  var outroRadio = document.querySelector('input[name="genero"][value="outro"]');
+  var outroDiv = document.getElementById('outro');
+  
+  if (outroRadio.checked) {
+    outroDiv.style.display = 'block';
+  } else {
+    outroDiv.style.display = 'none';
+  }
+}
 </script>
-
-
-
 
 <!-- 
     
     <input type="submit" value="Enviar" onclick="enviarBairro()" /> 
 </form> -->
-
-
 
 
 <?php
