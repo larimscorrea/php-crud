@@ -14,17 +14,11 @@
       <option value="carlito|Regional 3|Território 29">Carlito</option>
     </select>
 
+    <p id="regional"></p>
+    <p id="territorio"></p>
 
-    <!-- <select name="bairro" onchange="exibirBairro(this)">
-      <option value="" data-info="" data-info-primaria=""></option>
-      <option value="aldeota" data-info="Regional 1" data-info-primaria="Território 31">Aldeota</option>
-      <option value="boavista" data-info="Regional 2" data-info-primaria="Território 30">Boa-vista</option>
-      <option value="carlito" data-info="Regional 3" data-info-primaria="Território 29">Carlito</option>
-    </select> -->
-
-
-    <div id="regional"></div>
-    <div id="territorio"></div>
+    <!-- <div id="regional"></div>
+    <div id="territorio"></div> -->
 
       <label>
         <input type="radio" name="genero" value="feminino" onclick="exibirCampoOutro()"> Feminino
@@ -46,20 +40,37 @@
 
 <script>
     function exibirBairro(selectElement) {
-        var regionalDiv = document.getElementById('regional');
-        var territorioDiv = document.getElementById('territorio');
-        var selectedOption = selectElement.options[selectElement.selectedIndex];
+    var regionalDiv = document.getElementById('regional');
+    var territorioDiv = document.getElementById('territorio');
+    var selectedOption = selectElement.options[selectElement.selectedIndex];
 
-        var bairroValue = selectedOption.value;
-        var regionalValue = selectedOption.getAttribute('data-info');
-        var territorioValue = selectedOption.getAttribute('data-info-primaria');
+    // var bairroValue = selectedOption.value;
+    // var regionalValue = selectedOption.getAttribute('data-info');
+    // var territorioValue = selectedOption.getAttribute('data-info-primaria');
 
-        regionalDiv.innerHTML = `<p>Regional: ${regionalValue} </p>`;
-        territorioDiv.innerHTML = `<p>Território: ${territorioValue} </p>`;
+    // regionalDiv.textContent = `Regional: ${regionalValue}`;
+    // territorioDiv.textContent = `Território: ${territorioValue}`;
+
+    // Atualizar o valor do option para enviar apenas o valor do bairro
+    // selectedOption.value = bairroValue;
+
+    // Verificar se o valor foi definido antes de acessá-lo
+    if (selectedOption.dataset.info && selectedOption.dataset.infoPrimaria) {
+            var regionalValue = selectedOption.dataset.info;
+            var territorioValue = selectedOption.dataset.infoPrimaria;
+
+            regionalDiv.textContent = `Regional: ${regionalValue}`;
+            territorioDiv.textContent = `Território: ${territorioValue}`;
+        } else {
+            regionalDiv.textContent = "";
+            territorioDiv.textContent = "";
+        }
 
         // Atualizar o valor do option para enviar apenas o valor do bairro
-        selectedOption.value = bairroValue;
-    }
+        selectedOption.value = selectedOption.value.split('|')[0];
+    
+  }
+
 
   function exibirCampoOutro() {
   var outroRadio = document.querySelector('input[name="genero"][value="outro"]');
