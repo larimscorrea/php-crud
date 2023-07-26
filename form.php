@@ -56,8 +56,9 @@
     // selectedOption.value = bairroValue;
 
     var bairroValue = selectedOption.value;
-    var regionalValue = selectedOption.getAttribute('data-info');
-    var territorioValue = selectedOption.getAttribute('data-info-primaria');
+    var bairroInfo = bairroValue.split('|');
+    var regionalValue = bairroInfo[1];
+    var territorioValue = bairroInfo[2];
 
     if (regionalValue && territorioValue) {
         regionalDiv.textContent = `Regional: ${regionalValue}`;
