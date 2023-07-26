@@ -55,21 +55,11 @@
     // Atualizar o valor do option para enviar apenas o valor do bairro
     // selectedOption.value = bairroValue;
 
-    // Obter os valores dos atributos data-info e data-info-primaria
-        var regionalValue = selectedOption.getAttribute('data-info');
-        var territorioValue = selectedOption.getAttribute('data-info-primaria');
+      var regionalValue = selectedOption.getAttribute('data-info');
+      var territorioValue = selectedOption.getAttribute('data-info-primaria');
 
-        // Verificar se os valores estão definidos e não são vazios
-        if (regionalValue && territorioValue) {
-            regionalDiv.textContent = `Regional: ${regionalValue}`;
-            territorioDiv.textContent = `Território: ${territorioValue}`;
-        } else {
-            regionalDiv.textContent = "";
-            territorioDiv.textContent = "";
-        }
-
-        // Atualizar o valor do option para enviar apenas o valor do bairro
-        selectedOption.value = selectedOption.value.split('|')[0];
+      regionalDiv.textContent = `Regional: ${regionalValue}`;
+      territorioDiv.textContent = `Território: ${territorioValue}`;
 
     
   }
