@@ -44,6 +44,7 @@
     var territorioDiv = document.getElementById('territorio');
     var selectedOption = selectElement.options[selectElement.selectedIndex];
 
+
     // var bairroValue = selectedOption.value;
     // var regionalValue = selectedOption.getAttribute('data-info');
     // var territorioValue = selectedOption.getAttribute('data-info-primaria');
@@ -54,11 +55,12 @@
     // Atualizar o valor do option para enviar apenas o valor do bairro
     // selectedOption.value = bairroValue;
 
-    // Verificar se o valor foi definido antes de acessá-lo
-    if (selectedOption.dataset.info && selectedOption.dataset.infoPrimaria) {
-            var regionalValue = selectedOption.dataset.info;
-            var territorioValue = selectedOption.dataset.infoPrimaria;
+    // Obter os valores dos atributos data-info e data-info-primaria
+        var regionalValue = selectedOption.getAttribute('data-info');
+        var territorioValue = selectedOption.getAttribute('data-info-primaria');
 
+        // Verificar se os valores estão definidos e não são vazios
+        if (regionalValue && territorioValue) {
             regionalDiv.textContent = `Regional: ${regionalValue}`;
             territorioDiv.textContent = `Território: ${territorioValue}`;
         } else {
@@ -68,6 +70,7 @@
 
         // Atualizar o valor do option para enviar apenas o valor do bairro
         selectedOption.value = selectedOption.value.split('|')[0];
+
     
   }
 
