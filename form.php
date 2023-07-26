@@ -1,3 +1,12 @@
+<?php 
+// Verifique se o usuário está autenticado
+session_start();
+if (!isset($_SESSION['autenticado'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <h1>Formulário de cadastro</h1>
 <form action="receber.php" method="POST">
     Nome:
@@ -99,6 +108,7 @@
 
 
 <?php
+
 if (isset($_POST['nomeusuario'])) {
     echo $_POST['nomeusuario'] . '</br>';
 }

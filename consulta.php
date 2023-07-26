@@ -1,3 +1,13 @@
+<?php 
+// Verifique se o usuário está autenticado
+session_start();
+if (!isset($_SESSION['autenticado'])) {
+    header("Location: login.php");
+    exit();
+}
+
+?>
+
 <h1>Formulário de consulta</h1>
 <form action="consulta.php" method="POST">
     <input type="text" name="search">

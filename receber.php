@@ -37,4 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Requisição inválida.";
 }
+
+// Defina a sessão para indicar que o usuário está autenticado
+session_start();
+$_SESSION['autenticado'] = true;
 ?>
