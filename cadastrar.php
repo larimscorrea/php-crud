@@ -6,11 +6,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Faça a conexão com o banco de dados
     $host = 'localhost';
-    $usuario_bd = 'seu_usuario';
-    $senha_bd = 'sua_senha';
-    $nome_bd = 'seu_banco_de_dados';
+    $usuario_bd = '';
+    $senha_bd = '';
+    $bancodedados_bd = 'usuarios';
 
-    $conn = mysqli_connect($host, $usuario_bd, $senha_bd, $nome_bd);
+    $conn = mysqli_connect($host, $usuario_bd, $senha_bd, $bancodedados_bd);
 
     // Verifique a conexão
     if (!$conn) {
