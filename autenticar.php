@@ -3,6 +3,7 @@
 // $usuario = $_POST['usuario'] ?? '';
 // $senha = $_POST['senha'] ?? '';
 
+
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -43,18 +44,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Senha correta, o usuário é autenticado com sucesso
                 $_SESSION['autenticado'] = true;
                 $_SESSION['usuario'] = $row['nome_bd'];
-                echo "<script>alert('Autenticação bem-sucedida. Redirecionando para a página de formulário.');</script>";
-                echo "<script>setTimeout(function() { window.location.href = 'form.php'; }, 1000);</script>";
+
+                echo "<script>alert('Credencial correta!'); </script>";
+                header("Refresh: 0; url=form.php");
+                // header("Location: form.php");
+                exit();
+            } else {
+                // Senha incorreta, exibir alerta e redirecionar para a página de login novamente
+                echo "<script>alert('Credenciais incorretas. Tente novamente.');</script>";
+                header("Refresh: 0; url=login.php");
                 exit();
             }
+        } else {
+            // Usuário não encontrado, exibir alerta e redirecionar para a página de login novamente
+            echo "<script>alert('Usuário não encontrado. Tente novamente.');</script>";
+            header("Refresh: 0; url=login.php");
+            exit();
         }
+    } else {
+        // Erro na consulta, exibir alerta e redirecionar para a página de login novamente
+        echo "<script>alert('Erro ao processar a consulta. Tente novamente.');</script>";
+        header("Refresh: 0; url=login.php");
+        exit();
     }
-
-    // Se as credenciais estiverem incorretas ou o usuário não for encontrado, exiba o alerta e redirecione para a página de login novamente após 3 segundos
-    echo "<script>alert('Credenciais incorretas ou usuário não encontrado. Tente novamente.');</script>";
-    echo "<script>setTimeout(function() { window.location.href = 'login.php'; }, 3000);</script>";
-    exit();
 }
+
+
+
+
+
+
+
 
 
 
