@@ -35,19 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Campos do formulário não estão definidos.";
     }  
 
-    $nome_bd = $_POST['nome'];
-    $senha_bd = $_POST['senha'];
-
-    // Posso colocar nesse mesmo arquivo o código referente a tabela extra. 
-    $sql2 = "INSERT INTO usuarios (nome, senha) VALUES ('$nome_bd', '$senha_bd')";
-
-    if (mysqli_query($conn, $sql2)) {
-        echo "Registro inserido com sucesso.";
-    } else {
-        echo "Erro ao inserir registro: " . mysqli_error($conn);
-    }
-
-
 } else {
     echo "Requisição inválida.";
 }
