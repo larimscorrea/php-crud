@@ -6,3 +6,17 @@
     <input type="password" name="senha_bd">
     <input type="submit" value="Entrar" />
 </form>
+
+
+<?php
+
+if (isset($_POST['nome_bd'])) {
+    echo $_POST['nome_bd'] . '</br>';
+}
+
+if (isset($_POST['senha_bd'])) {
+    echo $_POST['senha_bd'] . '</br>';
+}
+
+
+?>

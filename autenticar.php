@@ -1,9 +1,4 @@
 <?php
-// // Obtenha os valores enviados pelo formulário de login
-// $usuario = $_POST['usuario'] ?? '';
-// $senha = $_POST['senha'] ?? '';
-
-
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -40,14 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $row = mysqli_fetch_assoc($resultado);
 
             // Verificar a senha usando password_verify
-            if (password_verify($senha, $row['senha_bd'])) {
+            if ($senha == $row['senha_bd']) {
                 // Senha correta, o usuário é autenticado com sucesso
                 $_SESSION['autenticado'] = true;
                 $_SESSION['usuario'] = $row['nome_bd'];
 
                 echo "<script>alert('Credencial correta!'); </script>";
                 header("Refresh: 0; url=form.php");
-                // header("Location: form.php");
                 exit();
             } else {
                 // Senha incorreta, exibir alerta e redirecionar para a página de login novamente
@@ -68,51 +62,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// $host = 'localhost';
-// $usuario = 'root';
-// $senha = '';
-// $data = 'teste-project';
-
-// $conn = mysqli_connect($host, $usuario, $senha, $data);
-
-// // Verifique a conexão
-// if (!$conn) {
-//     die("Falha na conexão: " . mysqli_connect_error());
-// }
-
-// // Faça a consulta para verificar as credenciais do usuário
-// $sql = "SELECT * FROM usuarios WHERE usuarios = '$usuario' AND senha = '$senha'";
-// $resultado = mysqli_query($conn, $sql);
-
-// // Verifique se a consulta retornou algum resultado
-// if (mysqli_num_rows($resultado) === 1) {
-//     $row = mysqli_fetch_assoc($resultado);
-
-//     // Verifique se a senha está correta
-//     if (password_verify($senha, $row['senha'])) {
-//         // Senha correta, redirecione para o form.php após a autenticação bem-sucedida
-//         session_start();
-//         $_SESSION['autenticado'] = true;
-//         header("Location: form.php");
-//         exit();
-//     }
-// }
-
-// // Caso as credenciais estejam incorretas, redirecione novamente para o login.php
-// header("Location: login.php");
-// exit();
 ?>
+
