@@ -1,5 +1,6 @@
 <?php 
 // Verifique se o usuário está autenticado
+
 session_start();
 if (!isset($_SESSION['autenticado'])) {
     header("Location: login.php");
@@ -39,10 +40,19 @@ if (!isset($_SESSION['autenticado'])) {
         <input type="radio" name="genero" value="outro" onclick="exibirCampoOutro()"> Outro
       </label>
 
-      <div id="outro" style="display: none;">
+      <!-- <div id="outro" style="display: none;">
         Qual gênero?
         <input type="text" name="outro-genero" id="outro-genero"> 
-      </div>
+      </div> -->
+
+      
+        Quais subs?
+        <input type="checkbox" name="subs[]" value="a"> Subs A
+        <input type="checkbox" name="subs[]" value="b"> Subs B
+        <input type="checkbox" name="subs[]" value="c"> Subs C
+        <input type="checkbox" name="subs[]" value="d"> Subs D
+        <input type="checkbox" name="subs[]" value="e"> Subs E
+
 
     <input type="submit" value="Enviar" />
 </form>
@@ -109,6 +119,14 @@ if (!isset($_SESSION['autenticado'])) {
 
 <?php
 
+// Receber os dados do formulário
+$subs = implode(',', $_POST['subs']);
+$subs = array_keys($_POST['subs']);
+
+// Salvar os dados no banco de dados
+$sql = "INSERT INTO subs (subs) VALUES ('$subs')";
+mysqli_query($conn, $sql);
+
 if (isset($_POST['nomeusuario'])) {
     echo $_POST['nomeusuario'] . '</br>';
 }
@@ -125,9 +143,32 @@ if (isset($_POST['territorio'])) {
   echo $_POST['territorio'] . '</br>';
 }
 
+// if (isset($_POST['a'])) {
+//   echo $_POST['a'] . '</br>';
+// }
+
+// if (isset($_POST['b'])) {
+//   echo $_POST['b'] . '</br>';
+// }
+
+// if (isset($_POST['c'])) {
+//   echo $_POST['c'] . '</br>';
+// }
+
+// if (isset($_POST['d'])) {
+//   echo $_POST['d'] . '</br>';
+// }
+
+// if (isset($_POST['e'])) {
+//   echo $_POST['e'] . '</br>';
+// }
+
+
 if (isset($_POST['genero'])) {
   echo $_POST['genero'] . '</br>';
 }
+
+
 
 if (isset($_POST['senha'])) {
     echo $_POST['senha'];
